@@ -1,4 +1,6 @@
 ---
+import { type APISpaceX } from '../types/api'
+
 const res = await fetch('https://api.spacexdata.com/v5/launches/query', {
     method: 'POST',
     headers: {
@@ -10,15 +12,20 @@ const res = await fetch('https://api.spacexdata.com/v5/launches/query', {
             sort: {
                 date: 'asc',
             },
-            limit: 12,
+            limit: 15,
         },
     }),
 })
-const data = await res.json()
-
-console.log(data)
+const { docs: launches } = (await res.json()) as APISpaceX
 ---
 
 <div class='grid gap-8 sm:grid-cols-2 lg:grid-cols-3'>
-    <article></article>
+    {
+        launches.map((launch) => (
+            <article>
+                <img src={launch.links.patch.small} alt={launch.name} />
+                <h2>Launch #{launch.id}</h2>
+            </article>
+        ))
+    }
 </div>
