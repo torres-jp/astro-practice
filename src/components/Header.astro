@@ -1,7 +1,6 @@
 ---
+import { Counter } from './Counter'
 import HeaderButton from './HeaderButton.astro'
-
-console.log('Header')
 ---
 
 <header class='py-8 px-4 mx-auto max-w-xl lg:py-16 lg:px-6'>
@@ -13,6 +12,8 @@ console.log('Header')
             All the information about SpaceX Launches
         </p>
     </div>
+
+    <Counter client:visible transition:persist />
 
     <nav
         class='flex flex-col items-center justify-between w-full text-center md:flex-row'
